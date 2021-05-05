@@ -85,12 +85,12 @@ jobs:
 
       - uses: camshaft/install@v1
         with:
-          crate: euphony
+          crate: euphony-cli
 
       - uses: camshaft/rust-cache@v1
 
       - name: Build
-        run: euphony publish
+        run: euphony-cli publish
 
       - name: Publish
         if: github.event_name != 'pull_request'
