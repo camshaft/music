@@ -26,7 +26,7 @@ jobs:
       - uses: actions-rs/toolchain@v1
         id: toolchain
         with:
-          toolchain: ${{ env.RUST_NIGHTLY_TOOLCHAIN }}
+          toolchain: stable
           profile: minimal
           override: true
           components: rustfmt
@@ -41,13 +41,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
-      - name: Install sccache
-        uses: actions-rs/install@v0.1
-        with:
-          crate: sccache
-          use-tool-cache: true
-          version: latest
 
       - uses: actions-rs/toolchain@v1
         id: toolchain
@@ -89,13 +82,20 @@ jobs:
 
       - uses: camshaft/rust-cache@v1
 
-      - name: Build
+      - name: Run build
         run: euphony-cli publish
 
-      - name: Publish
+      - name: Publish pages
         if: github.event_name != 'pull_request'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./target/euphony
           force_orphan: true # make sure the git repo doesn't get too big
+
+      - name: Publish artifacts
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v2
+        with:
+          name: output
+          path: ./target/euphony
