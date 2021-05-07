@@ -1,6 +1,6 @@
 [samples]
-bd = "clean://tidalcycles/sounds-tr808-fischer/bd8"
-sd = "clean://tidalcycles/sounds-tr808-fischer/sd8"
+bd = "clean://tidalcycles/sounds-dirty/bd"
+sd = "clean://tidalcycles/sounds-dirty/sn"
 hh = "clean://tidalcycles/sounds-tr808-fischer/ch8"
 cy = "clean://tidalcycles/sounds-tr808-fischer/cy8"
 ht = "clean://tidalcycles/sounds-tr808-fischer/ht8"

@@ -99,3 +99,6 @@ jobs:
         with:
           name: output
           path: ./target/euphony
+
+      - name: Cleanup
+        run: rm -rf target/euphony/
