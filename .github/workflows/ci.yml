@@ -71,19 +71,20 @@ jobs:
           toolchain: stable
           override: true
 
-      - name: Install supercollider
-        run: |
-          sudo apt-get update;
-          sudo apt-get install -y supercollider-server;
-
       - uses: camshaft/install@v1
         with:
           crate: euphony-cli
+          bins: euphony
 
       - uses: camshaft/rust-cache@v1
 
       - name: Run build
-        run: euphony-cli publish
+        run: euphony render
+
+      - name: Generate index
+        working-directory: target/euphony
+        run: |
+          tree -H "." -L 1 -T "songs" --noreport --charset utf-8 -P "*.wav" > index.html
 
       - name: Publish pages
         if: github.event_name != 'pull_request'

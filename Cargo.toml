@@ -1,30 +1,16 @@
 [workspace]
-members = [
-    "synths",
-    "songs/*",
-]
+members = ["common", "lean-sneeze", "hesitant-smoke", "placid-lace", "misty-spiders", "taboo-plate"]
 
-[profile.dev]
+[profile.euphony]
+inherits = "dev"
 debug = false
-debug-assertions = false
+lto = "off"
 
-[profile.dev.package."*"]
+[profile.euphony.package."*"]
 opt-level = 3
 
-[profile.dev.build-override]
+[profile.euphony.build-override]
 opt-level = 3
 
-[profile.release]
-lto = true
-codegen-units = 1
-incremental = false
-
-[profile.bench]
-lto = true
-codegen-units = 1
-incremental = false
-
-[patch.crates-io]
+# [patch.crates-io]
 # euphony = { path = "../euphony-rs/euphony" }
-euphony = { git = "https://github.com/camshaft/euphony-rs" }
-euphony-build = { git = "https://github.com/camshaft/euphony-rs" }

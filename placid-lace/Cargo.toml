@@ -1,0 +1,9 @@
+[package]
+name = "placid-lace"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+common = { path = "../common" }
+euphony = "0.1"
