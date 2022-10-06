@@ -86,7 +86,7 @@ async fn lead() {
     let d = b1.each(|_| rand::gen_range(0..usize::MAX));
 
     for _ in 0..LEN {
-        for (beat , i, v, d) in (&b1, &i, &v, &d).zip() {
+        for (beat, i, v, d) in (&b1, &i, &v, &d).zip() {
             lead_voice(to_frequency(Interval(*i, 7)), *v, *d)
                 .group("lead")
                 .spawn_primary();
@@ -121,14 +121,15 @@ async fn hihat() {
     let v = b1.each(|_| *rand::one_of(&[0.5, 0.25]));
 
     for _ in 0..LEN {
-        for (beat , i, v) in (&b1, &i, &v).zip() {
+        for (beat, i, v) in (&b1, &i, &v).zip() {
             let p = dirt::uxay[*i].play();
             let delay = p.delay();
             let sink = p.mul(*v).sink();
             async move {
                 delay.await;
                 sink.fin()
-            }.spawn_primary();
+            }
+            .spawn_primary();
             beat.delay().await;
         }
     }
@@ -140,14 +141,15 @@ async fn speek() {
     let v = b1.each(|_| *rand::one_of(&[1.0, 0.75, 0.5, 0.25]));
 
     for _ in 0..LEN {
-        for (beat , i, v) in (&b1, &i, &v).zip() {
+        for (beat, i, v) in (&b1, &i, &v).zip() {
             let p = dirt::speakspell[*i].play();
             let delay = p.delay();
             let sink = p.mul(*v).sink();
             async move {
                 delay.await;
                 sink.fin()
-            }.spawn_primary();
+            }
+            .spawn_primary();
             beat.delay().await;
         }
     }
@@ -167,7 +169,7 @@ async fn main() {
         let b = 2;
 
         (d - Beat(b, 1)).delay().await;
-        
+
         let count = 6;
 
         for _ in 0..count {
