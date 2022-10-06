@@ -90,6 +90,7 @@ jobs:
         working-directory: target/euphony
         run: |
           tree -H "." -L 1 -T "songs" --noreport --charset utf-8 -P "*.wav" > index.html
+          echo "build/" > .gitignore
 
       - name: Publish pages
         if: github.event_name != 'pull_request'
